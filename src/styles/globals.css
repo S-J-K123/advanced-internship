@@ -1782,3 +1782,19 @@ flex-direction: column;
   justify-content: center;
   min-width: 180px;
 }
+
+
+/*Library*/
+
+.library-container{
+  padding: 40px 0;
+  width: 100%;
+}
+
+.for-you__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #032b41;
+  margin-bottom: 16px;
+  margin-left: 327px;
+}

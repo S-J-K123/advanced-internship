@@ -11,12 +11,25 @@ import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import Input from "../../components/Input";
 import Link from "next/link";
+import { collection, addDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase";
+// import { title } from "process";
 
 export default function BookDetails() {
   const [posts, setPosts] = useState([]);
   const router = useRouter();
   const { id } = router.query;
   console.log(id);
+
+
+  function createPost() {
+const post = {
+  title: "Mastery",
+author: "Robert Greene"
+};
+addDoc(collection(db, "posts"), post)
+  }
+
 
   async function bookId() {
     try {
@@ -122,7 +135,7 @@ export default function BookDetails() {
             <div className="inner-book__bookmark--icon">
               <TurnedInNotIcon />
             </div>
-            <div className="inner-book__bookmark--text">
+            <div onClick={createPost} className="inner-book__bookmark--text">
               Add title to My Library
             </div>
           </div>
