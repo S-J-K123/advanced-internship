@@ -12,24 +12,31 @@ import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import Input from "../../components/Input";
 import Link from "next/link";
 import { collection, addDoc } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import { auth, db } from "../../../firebase";
+
 // import { title } from "process";
 
 export default function BookDetails() {
+
   const [posts, setPosts] = useState([]);
   const router = useRouter();
   const { id } = router.query;
   console.log(id);
+  const [isBookMarked, setIsBookMarked] = useState(false);
+  const { booksId } = useParams(id);
 
 
-  function createPost() {
-const post = {
-  title: "Mastery",
-author: "Robert Greene"
-};
-addDoc(collection(db, "posts"), post)
+ 
+  async function getBookById() {
+    if (user) {
+      await setDoc(doc(db, 'users', user.uid, 'library', bookId), {
+        bookId: bookId
+      });
+      setIsBookMarked(true);
+    }
   }
-
+  
+ 
 
   async function bookId() {
     try {
@@ -135,7 +142,7 @@ addDoc(collection(db, "posts"), post)
             <div className="inner-book__bookmark--icon">
               <TurnedInNotIcon />
             </div>
-            <div onClick={createPost} className="inner-book__bookmark--text">
+            <div className="inner-book__bookmark--text">
               Add title to My Library
             </div>
           </div>
